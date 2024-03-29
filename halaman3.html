@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Waktu Kita Bersama</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .typing-container {
+    background-color: #000;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    margin-bottom: 20px;
+    opacity: 0; /* Mulai dengan opacity 0 */
+    animation: fadeIn 2s forwards; /* Animasi untuk muncul */
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .header {
+    padding: 30px 0;
+    opacity: 0; /* Mulai dengan opacity 0 */
+    animation: fadeIn 20s forwards; /* Animasi untuk muncul */
+  }
+
+  h1 {
+    font-size: 3em;
+    margin: 0;
+  }
+
+  #countdown {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    font-weight: bold;
+    background: #000;
+    color: #fff;
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    opacity: 0; /* Mulai dengan opacity 0 */
+    animation: fadeIn 20s forwards; /* Animasi untuk muncul */
+  }
+
+  .buttons {
+    margin-top: 30px;
+    opacity: 0; /* Mulai dengan opacity 0 */
+    animation: fadeIn 25s forwards; /* Animasi untuk muncul */
+  }
+
+ 
+  .button {
+            background-color: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            outline: none;
+        }
+        .button:hover {
+            background-color: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+        .button:focus {
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+  
+</style>
+</head>
+<body>
+
+<div class="typing-container">
+  <h2 id="typing-text"></h2>
+</div>
+
+<div class="header">
+  <h1>Waktu Kita Bersama Jika Sampai Sekarang</h1>
+  <div id="countdown"></div>
+</div>
+
+<div class="buttons">
+  <a href="halaman4.html" class="button">Halaman Selanjutnya</a>
+</div>
+
+<script>
+// Tulisan untuk animasi mengetik
+var typingText = "Waktu bersifat fana tapi memori akan selalu meninggalkan jejaknya";
+var typingSpeed = 50; // Kecepatan animasi mengetik (ms)
+
+// Fungsi untuk menjalankan animasi mengetik
+function startTypingAnimation() {
+  var index = 0;
+  var typingInterval = setInterval(function() {
+    if (index < typingText.length) {
+      document.getElementById('typing-text').innerHTML += typingText.charAt(index);
+      index++;
+    } else {
+      clearInterval(typingInterval);
+      // Setelah animasi mengetik selesai, munculkan elemen lainnya
+      document.querySelector('.header').style.opacity = '1';
+      document.querySelector('#countdown').style.opacity = '1';
+      document.querySelector('.buttons').style.opacity = '1';
+    }
+  }, typingSpeed);
+}
+
+// Panggil fungsi untuk memulai animasi mengetik
+startTypingAnimation();
+
+// Tanggal target
+var targetDate = new Date('January 12, 2024').getTime();
+
+// Update hitungan mundur setiap 1 detik
+var countdownFunction = setInterval(function() {
+  // Dapatkan waktu sekarang
+  var now = new Date().getTime();
+  
+  // Hitung selisih waktu antara sekarang dan target
+  var distance = now - targetDate;
+
+  // Hitung komponen waktu yang tersisa
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+  // Format waktu
+  var countdownString = '';
+  countdownString += '<span>' + pad(days * 24 + hours, 2) + '</span>' + ' : ' +
+                     '<span>' + pad(minutes, 2) + '</span>' + ' : ' +
+                     '<span>' + pad(seconds, 2) + '</span>';
+
+  // Tampilkan waktu yang tersisa dalam elemen dengan id "countdown"
+  document.getElementById('countdown').innerHTML = countdownString;
+}, 1000);
+
+// Fungsi untuk menambahkan nol di depan angka jika kurang dari 10
+function pad(number, length) {
+  return (number < 10 ? '0' : '') + number;
+}
+</script>
+
+</body>
+</html>

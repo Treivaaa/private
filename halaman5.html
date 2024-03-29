@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Typing Animation</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .text-container {
+    font-size: 2em;
+    margin: 0 auto;
+    overflow: hidden;
+    max-width: 80%; /* Lebar maksimum untuk kontainer teks */
+  }
+
+  .text-line {
+    border-right: 2px solid #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 3s steps(40, end) forwards;
+    opacity: 0;
+    margin-bottom: 20px; /* Ruang antara baris teks */
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  .text-line:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .text-line:nth-child(2) {
+    animation-delay: 3s;
+  }
+  .text-line:nth-child(3) {
+    animation-delay: 6s;
+  }
+  .text-line:nth-child(4) {
+    animation-delay: 9s;
+  }
+  .text-line:nth-child(5) {
+    animation-delay: 12s; /* Delay tambahan untuk baris terakhir */
+  }
+
+  /* Efek hover untuk teks */
+  .text-line:hover {
+    color: #ff6f00; /* Warna teks saat dihover */
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="text-container">
+  <div class="text-line" id="line1"></div>
+  <div class="text-line" id="line2"></div>
+  <div class="text-line" id="line3"></div>
+  <div class="text-line" id="line4"></div>
+  <div class="text-line" id="line5"></div>
+</div>
+
+<script>
+  var textLines = [
+    "Sekarang mungkin waktunya untuk kita berpisah,",
+    "makasih untuk waktu berharga dan pelajarannyo,",
+    "kakak berharap farah bahagia, semoga kebahagiaan selalu samo farah,",
+    "selamat lah dapet kampus impiannyo belajar yang rajin makan yang cukup jaga diri baik baik.",
+    "Kakak pegi yo selamat tinggal farah,kakak sayang farah.",
+]
+  function displayTextLine(index) {
+    document.getElementById('line' + (index + 1)).innerHTML = textLines[index];
+    document.getElementById('line' + (index + 1)).style.opacity = 1;
+  }
+
+  for (var i = 0; i < textLines.length; i++) {
+    setTimeout(displayTextLine, i * 3000, i);
+  }
+</script>
+
+</body>
+</html>
